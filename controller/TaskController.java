@@ -126,28 +126,11 @@ public class TaskController {
 				tasks.add(task);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			throw new RuntimeException("Erro ao deletar a tarefa");
+		}finally {
+			ConnectionFactory.closeConnection(connection, statement, resultSet);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		return null;
+			
+		return tasks;
 	}
 }
