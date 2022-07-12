@@ -75,6 +75,8 @@ public class TaskController {
 			statement.execute();
 		} catch (Exception e) {
 			throw new RuntimeException("Eroo ao atualizar tarefa" + e.getMessage() + e);
+		}finally {
+			ConnectionFactory.closeConnection(connection, statement);
 		}
 		
 	}
