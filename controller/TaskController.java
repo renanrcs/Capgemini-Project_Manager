@@ -35,7 +35,10 @@ public class TaskController {
 			
 			statement.execute();
 		} catch (Exception e) {
-			// TODO: handle exception
+			
+			throw new RuntimeException("Eroo ao salvar tarefa" + e.getMessage() + e);
+		} finally {
+			ConnectionFactory.closeConnection(connection);
 		}
 		
 	}
