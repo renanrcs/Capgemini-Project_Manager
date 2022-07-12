@@ -3,7 +3,9 @@ package controller;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Task;
@@ -91,6 +93,61 @@ public class TaskController {
 	}
 	
 	public List<Task> getAll(int idProject) {
+		
+		String sql = "SELECT * FROM tasks WHERE idProject = ?";
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		List<Task> tasks = new ArrayList<Task>();
+		
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, idProject);
+			
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				Task task = new Task();
+				
+				task.setId(resultSet.getInt("id"));
+				task.setIdProject(resultSet.getInt("idProject"));
+				task.setName(resultSet.getString("name"));
+				task.setDescription(resultSet.getString("description"));
+				task.setNotes(resultSet.getString("notes"));
+				task.setCompleted(resultSet.getBoolean("status"));
+				task.setDeadline(resultSet.getDate("deadline"));
+				task.setCreatedAt(resultSet.getDate("createdAt"));
+				task.setUpdatedAt(resultSet.getDate("updatedAt"));
+				
+				tasks.add(task);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return null;
 	}
 }
