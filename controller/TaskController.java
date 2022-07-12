@@ -35,7 +35,6 @@ public class TaskController {
 			
 			statement.execute();
 		} catch (Exception e) {
-			
 			throw new RuntimeException("Eroo ao salvar tarefa" + e.getMessage() + e);
 		} finally {
 			ConnectionFactory.closeConnection(connection, statement);
@@ -44,6 +43,30 @@ public class TaskController {
 	}
 	
 	public void update(Task task) {
+		
+		String sql = "UPDATE tasks SET idProject = ?, name = ?, description = ?, notes = ?"
+				+ "status = ?, deadline = ?, createdAt = ?, updatedAt = ?"
+				+ "WHERE id = ?";
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, task.getIdProject());
+			statement.setString(2, task.getName());
+			statement.setString(3, task.getDescription());
+			statement.setString(4, task.getNotes());
+			statement.setBoolean(5, task.isCompleted());
+			statement.setDate(6, new Date(task.getDeadline().getTime()));
+			statement.setDate(7, new Date(task.getCreatedAt().getTime()));
+			statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
+			
+			statement.execute();
+		} catch (Exception e) {
+			throw new RuntimeException("Eroo ao salvar tarefa" + e.getMessage() + e);
+		}
 		
 	}
 	
