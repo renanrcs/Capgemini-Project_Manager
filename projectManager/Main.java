@@ -1,21 +1,25 @@
 package projectManager;
 
-import java.sql.Connection;
+import java.util.Date;
 
-import util.ConnectionFactory;
+import controller.ProjectController;
+import model.Project;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println("Project On Fire");
+		ProjectController projectController = new ProjectController();
 		
-		Connection c = (Connection) new ConnectionFactory();
+		Project project = new Project();
 		
-		ConnectionFactory.closeConnection(c);
+		project.setUpdatedAt(new Date());
+		project.setName("Projeto teste");
 		
+		project.setDescription("Testando se o codigo esta funcionando");
 		
-
+		projectController.save(project);
+		
 	}
 
 }

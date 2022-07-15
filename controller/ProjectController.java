@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,10 @@ public class ProjectController {
 	
 	public void save(Project project) {
 		
-		String sql = "INSERT INTO projects (name, description, createdAt, updatedAt)"
+		String sql = "INSERT INTO projects (name, "
+				+ "description, "
+				+ "createdAt, "
+				+ "updatedAt)"
 				+ "VALUES (?, ?, ?, ?)";
 		
 		Connection connection = null;
@@ -30,8 +34,8 @@ public class ProjectController {
 			statement.setDate(4, new Date(project.getUpdatedAt().getTime()));
 			
 			statement.execute();
-		} catch (Exception e) {
-			throw new RuntimeException("Erro ao salvar Projeto" + e.getMessage() + e);
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao salvar Projeto", e);
 		} finally {
 			ConnectionFactory.closeConnection(connection, statement);
 		}
@@ -57,7 +61,7 @@ public class ProjectController {
 			
 			statement.execute();
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao atualiza o Projeto" + e.getMessage() + e);
+			throw new RuntimeException("Erro ao atualiza o Projeto", e);
 		} finally {
 			ConnectionFactory.closeConnection(connection, statement);
 		}
@@ -78,7 +82,7 @@ public class ProjectController {
 			
 			statement.execute();
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao deletar o Projeto" + e.getMessage() + e);
+			throw new RuntimeException("Erro ao deletar o Projeto", e);
 		} finally {
 			ConnectionFactory.closeConnection(connection, statement);
 		}
@@ -88,11 +92,11 @@ public class ProjectController {
 		
 		String sql = "SELECT * FROM projects";
 		
+		List<Project> projects = new ArrayList<Project>();
+
 		Connection connection = null;
 		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		
-		List<Project> projects = new ArrayList<Project>();
+		ResultSet resultSet = null;		
 		
 		try {
 			connection = ConnectionFactory.getConnection();
@@ -116,7 +120,7 @@ public class ProjectController {
 			}
 			
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao buscar os projetos");
+			throw new RuntimeException("Erro ao buscar os projetos", e);
 		}finally {
 			ConnectionFactory.closeConnection(connection, statement, resultSet);
 		}
