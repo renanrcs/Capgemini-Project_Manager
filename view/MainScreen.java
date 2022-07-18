@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.AbstractListModel;
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
+import javax.swing.JScrollPane;
 
 public class MainScreen extends JFrame {
 
@@ -50,30 +51,30 @@ public class MainScreen extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 153, 102));
+		JPanel panelToolBar = new JPanel();
+		panelToolBar.setBackground(new Color(0, 153, 102));
 		
-		JLabel lblNewLabel = new JLabel(" Gestor de Projetos");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\ok-icon.png"));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 36));
+		JLabel LabelToolBarTitle = new JLabel(" Gestor de Projetos");
+		LabelToolBarTitle.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\ok-icon.png"));
+		LabelToolBarTitle.setForeground(Color.WHITE);
+		LabelToolBarTitle.setBackground(new Color(255, 255, 255));
+		LabelToolBarTitle.setFont(new Font("Segoe UI", Font.BOLD, 36));
 		
-		JLabel lblAnoteTudo = new JLabel("Anote tudo, n\u00E3o esque\u00E7a de nada");
-		lblAnoteTudo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		lblAnoteTudo.setForeground(Color.WHITE);
+		JLabel labelToolBarSubtitle = new JLabel("Anote tudo, n\u00E3o esque\u00E7a de nada");
+		labelToolBarSubtitle.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		labelToolBarSubtitle.setForeground(Color.WHITE);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_1.setBackground(Color.WHITE);
+		JPanel panelProjects = new JPanel();
+		panelProjects.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panelProjects.setBackground(Color.WHITE);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_2.setBackground(Color.WHITE);
+		JPanel panelTasks = new JPanel();
+		panelTasks.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panelTasks.setBackground(Color.WHITE);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_3.setBackground(Color.WHITE);
+		JPanel panelProjectsList = new JPanel();
+		panelProjectsList.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panelProjectsList.setBackground(Color.WHITE);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -81,92 +82,104 @@ public class MainScreen extends JFrame {
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+				.addComponent(panelToolBar, GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+						.addComponent(panelProjectsList, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panelProjects, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+						.addComponent(panelTasks, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
 						.addComponent(panel_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panelToolBar, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panelTasks, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panelProjects, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+						.addComponent(panelProjectsList, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
 						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
 		);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBackground(Color.WHITE);
+		JPanel panelEmptyList = new JPanel();
+		panelEmptyList.setBackground(Color.WHITE);
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+					.addComponent(panelEmptyList, GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+					.addComponent(panelEmptyList, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\list-icon.png"));
+		JLabel labelEmptyListIcon = new JLabel("");
+		labelEmptyListIcon.setHorizontalAlignment(SwingConstants.CENTER);
+		labelEmptyListIcon.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\list-icon.png"));
 		
-		JLabel lblNewLabel_6 = new JLabel("Nenhuma tarefa por aqui :|)");
-		lblNewLabel_6.setForeground(new Color(0, 153, 102));
-		lblNewLabel_6.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel labelEmptyListTitle = new JLabel("Nenhuma tarefa por aqui :|)");
+		labelEmptyListTitle.setForeground(new Color(0, 153, 102));
+		labelEmptyListTitle.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		labelEmptyListTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblNewLabel_7 = new JLabel("Clique no bot\u00E3o + para adicionar uma nova tarefa");
-		lblNewLabel_7.setForeground(new Color(204, 204, 204));
-		lblNewLabel_7.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
-		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
-		gl_panel_5.setHorizontalGroup(
-			gl_panel_5.createParallelGroup(Alignment.LEADING)
-				.addComponent(lblNewLabel_5, GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-				.addGroup(Alignment.TRAILING, gl_panel_5.createSequentialGroup()
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel_7, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_6, GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
+		JLabel labelEmptyListSubtitle = new JLabel("Clique no bot\u00E3o + para adicionar uma nova tarefa");
+		labelEmptyListSubtitle.setForeground(new Color(204, 204, 204));
+		labelEmptyListSubtitle.setFont(new Font("Segoe UI", Font.BOLD, 12));
+		labelEmptyListSubtitle.setHorizontalAlignment(SwingConstants.CENTER);
+		GroupLayout gl_panelEmptyList = new GroupLayout(panelEmptyList);
+		gl_panelEmptyList.setHorizontalGroup(
+			gl_panelEmptyList.createParallelGroup(Alignment.LEADING)
+				.addComponent(labelEmptyListIcon, GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_panelEmptyList.createSequentialGroup()
+					.addGroup(gl_panelEmptyList.createParallelGroup(Alignment.TRAILING)
+						.addComponent(labelEmptyListSubtitle, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+						.addComponent(labelEmptyListTitle, GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
 					.addContainerGap())
 		);
-		gl_panel_5.setVerticalGroup(
-			gl_panel_5.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_5.createSequentialGroup()
+		gl_panelEmptyList.setVerticalGroup(
+			gl_panelEmptyList.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panelEmptyList.createSequentialGroup()
 					.addContainerGap(130, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_5)
+					.addComponent(labelEmptyListIcon)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewLabel_6)
+					.addComponent(labelEmptyListTitle)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_7)
+					.addComponent(labelEmptyListSubtitle)
 					.addGap(100))
 		);
-		panel_5.setLayout(gl_panel_5);
+		panelEmptyList.setLayout(gl_panelEmptyList);
 		panel_4.setLayout(gl_panel_4);
 		
-		JList list = new JList();
-		list.setFixedCellHeight(50);
-		list.setSelectionBackground(new Color(0, 153, 102));
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		list.setModel(new AbstractListModel() {
+		JScrollPane scrollPaneProjects = new JScrollPane();
+		GroupLayout gl_panelProjectsList = new GroupLayout(panelProjectsList);
+		gl_panelProjectsList.setHorizontalGroup(
+			gl_panelProjectsList.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPaneProjects, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+		);
+		gl_panelProjectsList.setVerticalGroup(
+			gl_panelProjectsList.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPaneProjects, GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+		);
+		
+		JList listProjects = new JList();
+		scrollPaneProjects.setViewportView(listProjects);
+		listProjects.setFixedCellHeight(50);
+		listProjects.setSelectionBackground(new Color(0, 153, 102));
+		listProjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listProjects.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		listProjects.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
 			public int getSize() {
 				return values.length;
@@ -175,97 +188,82 @@ public class MainScreen extends JFrame {
 				return values[index];
 			}
 		});
-		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
-		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(list, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(list, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		panel_3.setLayout(gl_panel_3);
+		panelProjectsList.setLayout(gl_panelProjectsList);
 		
-		JLabel lblNewLabel_2 = new JLabel("Tarefas");
-		lblNewLabel_2.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblNewLabel_2.setForeground(new Color(0, 153, 102));
+		JLabel labelTasksTitle = new JLabel("Tarefas");
+		labelTasksTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		labelTasksTitle.setForeground(new Color(0, 153, 102));
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\add-icon.png"));
-		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
+		JLabel labelTasksAdd = new JLabel("");
+		labelTasksAdd.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\add-icon.png"));
+		GroupLayout gl_panelTasks = new GroupLayout(panelTasks);
+		gl_panelTasks.setHorizontalGroup(
+			gl_panelTasks.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelTasks.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
+					.addComponent(labelTasksTitle, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+					.addComponent(labelTasksAdd, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
+		gl_panelTasks.setVerticalGroup(
+			gl_panelTasks.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelTasks.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 16, Short.MAX_VALUE))
+					.addGroup(gl_panelTasks.createParallelGroup(Alignment.LEADING)
+						.addComponent(labelTasksAdd, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelTasksTitle, GroupLayout.PREFERRED_SIZE, 16, Short.MAX_VALUE))
 					.addContainerGap())
 		);
-		panel_2.setLayout(gl_panel_2);
+		panelTasks.setLayout(gl_panelTasks);
 		
-		JLabel lblNewLabel_1 = new JLabel("Projetos");
-		lblNewLabel_1.setForeground(new Color(0, 153, 102));
-		lblNewLabel_1.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		JLabel labelProjectsTitle = new JLabel("Projetos");
+		labelProjectsTitle.setForeground(new Color(0, 153, 102));
+		labelProjectsTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\add-icon.png"));
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
+		JLabel labelProjectsAdd = new JLabel("");
+		labelProjectsAdd.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\add-icon.png"));
+		GroupLayout gl_panelProjects = new GroupLayout(panelProjects);
+		gl_panelProjects.setHorizontalGroup(
+			gl_panelProjects.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelProjects.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+					.addComponent(labelProjectsTitle, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_3)
+					.addComponent(labelProjectsAdd)
 					.addContainerGap())
 		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
+		gl_panelProjects.setVerticalGroup(
+			gl_panelProjects.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelProjects.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 16, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panelProjects.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelProjectsTitle, GroupLayout.PREFERRED_SIZE, 16, Short.MAX_VALUE)
+						.addComponent(labelProjectsAdd, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
-		panel_1.setLayout(gl_panel_1);
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		panelProjects.setLayout(gl_panelProjects);
+		GroupLayout gl_panelToolBar = new GroupLayout(panelToolBar);
+		gl_panelToolBar.setHorizontalGroup(
+			gl_panelToolBar.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelToolBar.createSequentialGroup()
 					.addGap(10)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 557, Short.MAX_VALUE))
-				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(LabelToolBarTitle, GroupLayout.PREFERRED_SIZE, 557, Short.MAX_VALUE))
+				.addGroup(gl_panelToolBar.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblAnoteTudo, GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+					.addComponent(labelToolBarSubtitle, GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		gl_panelToolBar.setVerticalGroup(
+			gl_panelToolBar.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelToolBar.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addComponent(LabelToolBarTitle, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblAnoteTudo, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+					.addComponent(labelToolBarSubtitle, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
 					.addGap(256))
 		);
-		panel.setLayout(gl_panel);
+		panelToolBar.setLayout(gl_panelToolBar);
 		contentPane.setLayout(gl_contentPane);
 	}
 }
