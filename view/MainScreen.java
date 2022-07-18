@@ -17,6 +17,7 @@ import javax.swing.JList;
 import javax.swing.SwingConstants;
 import javax.swing.AbstractListModel;
 import java.awt.Dimension;
+import javax.swing.ListSelectionModel;
 
 public class MainScreen extends JFrame {
 
@@ -161,6 +162,10 @@ public class MainScreen extends JFrame {
 		panel_4.setLayout(gl_panel_4);
 		
 		JList list = new JList();
+		list.setFixedCellHeight(50);
+		list.setSelectionBackground(new Color(0, 153, 102));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		list.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
 			public int getSize() {
