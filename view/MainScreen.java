@@ -28,7 +28,7 @@ import java.awt.ComponentOrientation;
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	private JTable tableTask;
 
 	/**
 	 * Launch the application.
@@ -129,10 +129,20 @@ public class MainScreen extends JFrame {
 					.addContainerGap())
 		);
 		
-		table = new JTable();
-		table.setRowHeight(25);
-		table.setShowVerticalLines(false);
-		table.setModel(new DefaultTableModel(
+		tableTask = new JTable();
+		
+		//Customizando o header da table de tarefas
+		tableTask.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		tableTask.getTableHeader().setBackground(new Color(0, 153, 152));
+		tableTask.getTableHeader().setForeground(new Color(255, 255, 255));
+		
+		//Criando um sort automatico para as colunas da table
+		tableTask.setAutoCreateRowSorter(true);
+		
+		tableTask.setShowHorizontalLines(false);
+		tableTask.setRowHeight(25);
+		tableTask.setShowVerticalLines(false);
+		tableTask.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null},
 				{null, null, null, null},
@@ -150,7 +160,7 @@ public class MainScreen extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(tableTask);
 		panel_4.setLayout(gl_panel_4);
 		
 		/*JPanel panelEmptyList = new JPanel();
