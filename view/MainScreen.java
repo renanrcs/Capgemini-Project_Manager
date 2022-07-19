@@ -24,6 +24,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DropMode;
 import java.awt.ComponentOrientation;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainScreen extends JFrame {
 
@@ -278,6 +280,15 @@ public class MainScreen extends JFrame {
 		labelProjectsTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		
 		JLabel labelProjectsAdd = new JLabel("");
+		labelProjectsAdd.addMouseListener(new MouseAdapter() {
+			private ProjectDialogScreen projectDialogScreen;
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				projectDialogScreen = new ProjectDialogScreen();
+				projectDialogScreen.setVisible(rootPaneCheckingEnabled);
+			}
+		});
 		labelProjectsAdd.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\add-icon.png"));
 		GroupLayout gl_panelProjects = new GroupLayout(panelProjects);
 		gl_panelProjects.setHorizontalGroup(
