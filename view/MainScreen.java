@@ -19,10 +19,16 @@ import javax.swing.AbstractListModel;
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.DropMode;
+import java.awt.ComponentOrientation;
 
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -77,21 +83,20 @@ public class MainScreen extends JFrame {
 		panelProjectsList.setBackground(Color.WHITE);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_4.setBackground(Color.WHITE);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(panelToolBar, GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+				.addComponent(panelToolBar, GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(panelProjectsList, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(panelProjects, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panelTasks, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-						.addComponent(panel_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+						.addComponent(panelTasks, GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -103,11 +108,52 @@ public class MainScreen extends JFrame {
 						.addComponent(panelProjects, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelProjectsList, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+						.addComponent(panelProjectsList, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 		);
 		
-		JPanel panelEmptyList = new JPanel();
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+		gl_panel_4.setHorizontalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel_4.setVerticalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		table = new JTable();
+		table.setRowHeight(25);
+		table.setShowVerticalLines(false);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"Nome", "Descricao", "Prazo", "Tarefa Concluida"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, Boolean.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane.setViewportView(table);
+		panel_4.setLayout(gl_panel_4);
+		
+		/*JPanel panelEmptyList = new JPanel();
 		panelEmptyList.setBackground(Color.WHITE);
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
@@ -160,7 +206,7 @@ public class MainScreen extends JFrame {
 					.addGap(100))
 		);
 		panelEmptyList.setLayout(gl_panelEmptyList);
-		panel_4.setLayout(gl_panel_4);
+		panel_4.setLayout(gl_panel_4);*/
 		
 		JScrollPane scrollPaneProjects = new JScrollPane();
 		GroupLayout gl_panelProjectsList = new GroupLayout(panelProjectsList);
@@ -174,10 +220,10 @@ public class MainScreen extends JFrame {
 		);
 		
 		JList listProjects = new JList();
+		listProjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneProjects.setViewportView(listProjects);
 		listProjects.setFixedCellHeight(50);
 		listProjects.setSelectionBackground(new Color(0, 153, 102));
-		listProjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listProjects.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		listProjects.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
