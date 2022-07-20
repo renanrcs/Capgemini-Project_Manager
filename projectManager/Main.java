@@ -1,7 +1,5 @@
 package projectManager;
 
-import java.util.Date;
-
 import controller.ProjectController;
 import model.Project;
 
@@ -13,7 +11,7 @@ public class Main {
 		
 		Project project = new Project();
 		
-		project.setUpdatedAt(new Date());
+		//project.setUpdatedAt(new Date());
 		project.setName("Projeto teste");
 		
 		project.setDescription("Testando se o codigo esta funcionando");

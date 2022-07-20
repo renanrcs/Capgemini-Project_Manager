@@ -121,17 +121,17 @@ public class ProjectDialogScreen extends JDialog {
 				try {
 					Project project = new Project();
 					project.setName(textFieldName.getText());
-					project.setDescription(getName());				
+					project.setDescription(textAreaDescription.getText());				
 					
 					controler.save(project);			
 					JOptionPane.showMessageDialog(rootPane, "Projeto salvo com sucesso!");
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(rootPane, e2.getMessage());
-				}
-				
-				this.mouseExited(e);
+				}			
+					setVisible(false);
 			}
 		});
+		
 		labelToolBarSave.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\ok-icon.png"));
 		GroupLayout gl_panelToolBar = new GroupLayout(panelToolBar);
 		gl_panelToolBar.setHorizontalGroup(

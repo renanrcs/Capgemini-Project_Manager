@@ -102,8 +102,6 @@ public class ProjectController {
 			connection = ConnectionFactory.getConnection();
 			statement = connection.prepareStatement(sql);
 			
-			//statement.setInt(1, id);
-			
 			resultSet = statement.executeQuery();
 			
 			while (resultSet.next()) {
