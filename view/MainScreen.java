@@ -257,7 +257,7 @@ public class MainScreen extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TaskDialogScreen taskDialogScreen = new TaskDialogScreen();
-				taskDialogScreen.setProject(null);
+				//taskDialogScreen.setProject(null);
 				taskDialogScreen.setVisible(rootPaneCheckingEnabled);
 			}
 		});
