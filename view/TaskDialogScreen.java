@@ -10,6 +10,7 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.Font;
@@ -17,9 +18,22 @@ import javax.swing.ImageIcon;
 import java.awt.Rectangle;
 import javax.swing.border.LineBorder;
 
+import controller.TaskController;
+import model.Project;
+import model.Task;
+
+import javax.swing.JFormattedTextField;
+import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class TaskDialogScreen extends JDialog {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField labelTextField;
+	TaskController controller = new TaskController();
+	Project project = new Project();
 
 	/**
 	 * Launch the application.
@@ -44,119 +58,156 @@ public class TaskDialogScreen extends JDialog {
 	public TaskDialogScreen() {
 		setBounds(100, 100, 490, 517);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 153, 102));
+		JPanel panelToolBar = new JPanel();
+		panelToolBar.setBackground(new Color(0, 153, 102));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
+		JPanel panelTask = new JPanel();
+		panelTask.setBackground(Color.WHITE);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
+						.addComponent(panelTask, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panelToolBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
 					.addGap(0))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panelToolBar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
+					.addComponent(panelTask, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
 		);
 		
-		JLabel lblNewLabel = new JLabel("Nome");
-		lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		JLabel labelName = new JLabel("Nome");
+		labelName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		labelTextField = new JTextField();
+		labelTextField.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Descri\u00E7ao");
-		lblNewLabel_1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		JLabel labelDescription = new JLabel("Descri\u00E7ao");
+		labelDescription.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		textArea.setToolTipText("");
+		JLabel labelDeadline = new JLabel("Prazo");
+		labelDeadline.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		
-		JLabel lblNewLabel_2 = new JLabel("Prazo");
-		lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		JLabel labelNotes = new JLabel("Notas");
+		labelNotes.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		JFormattedTextField formattedTextFieldDeadline = new JFormattedTextField();
 		
-		JLabel lblNewLabel_3 = new JLabel("Notas");
-		lblNewLabel_3.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		JScrollPane scrollPaneDescription = new JScrollPane();
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
+		JScrollPane scrollPaneNotes = new JScrollPane();
+		GroupLayout gl_panelTask = new GroupLayout(panelTask);
+		gl_panelTask.setHorizontalGroup(
+			gl_panelTask.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelTask.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(textArea_1, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-						.addComponent(textArea, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+					.addGroup(gl_panelTask.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelTask.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(labelDescription, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(labelTextField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+						.addComponent(scrollPaneDescription, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+						.addComponent(formattedTextFieldDeadline, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+						.addComponent(labelDeadline, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+						.addComponent(scrollPaneNotes, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+						.addComponent(labelNotes, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+						.addComponent(labelName, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
 					.addContainerGap())
 		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel)
+		gl_panelTask.setVerticalGroup(
+			gl_panelTask.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelTask.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(labelName)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(26)
-					.addComponent(lblNewLabel_1)
+					.addComponent(labelTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(labelDescription)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-					.addGap(16)
-					.addComponent(lblNewLabel_2)
+					.addComponent(scrollPaneDescription, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(labelDeadline)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(formattedTextFieldDeadline, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewLabel_3)
+					.addComponent(labelNotes)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textArea_1, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(scrollPaneNotes, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addGap(134))
 		);
-		panel_1.setLayout(gl_panel_1);
 		
-		JLabel lblNewLabel_4 = new JLabel("Tarefa");
-		lblNewLabel_4.setFont(new Font("Segoe UI", Font.BOLD, 36));
-		lblNewLabel_4.setForeground(Color.WHITE);
+		JTextArea textAreaNotes = new JTextArea();
+		scrollPaneNotes.setViewportView(textAreaNotes);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\ok-icon.png"));
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		JTextArea textAreaDescription = new JTextArea();
+		scrollPaneDescription.setViewportView(textAreaDescription);
+		panelTask.setLayout(gl_panelTask);
+		
+		JLabel labelToolbarTitle = new JLabel("Tarefa");
+		labelToolbarTitle.setFont(new Font("Segoe UI", Font.BOLD, 36));
+		labelToolbarTitle.setForeground(Color.WHITE);
+		
+		JLabel labelToolBarSave = new JLabel("");
+		labelToolBarSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				try {
+					Task task = new Task();
+					
+					task.setIdProject(project.getId());
+					task.setName(labelName.getText());
+					task.setDescription(textAreaDescription.getText());
+					task.setNotes(textAreaNotes.getText());
+					task.setCompleted(false);
+					
+					SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy");
+					Date deadline = null;
+					
+					deadline = simpleDate.parse(formattedTextFieldDeadline.getText());
+					task.setDeadline(deadline);
+					
+					controller.save(task);
+					JOptionPane.showMessageDialog(labelToolBarSave, "Tarefa salva com Suceso");
+					
+				}catch (Exception e2) {
+					JOptionPane.showMessageDialog(labelToolBarSave, e2.getMessage());
+				}
+			}
+		});
+		this.dispose();
+		
+		labelToolBarSave.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\ok-icon.png"));
+		GroupLayout gl_panelToolBar = new GroupLayout(panelToolBar);
+		gl_panelToolBar.setHorizontalGroup(
+			gl_panelToolBar.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelToolBar.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel_4)
+					.addComponent(labelToolbarTitle)
 					.addPreferredGap(ComponentPlacement.RELATED, 303, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addComponent(labelToolBarSave, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+		gl_panelToolBar.setVerticalGroup(
+			gl_panelToolBar.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panelToolBar.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panelToolBar.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelToolbarTitle, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+						.addComponent(labelToolBarSave, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
-		panel.setLayout(gl_panel);
+		panelToolBar.setLayout(gl_panelToolBar);
 		getContentPane().setLayout(groupLayout);
 
 	}
 
+	public void setProject(Project project) {
+		this.project = project;
+	}
+	
+	
 }

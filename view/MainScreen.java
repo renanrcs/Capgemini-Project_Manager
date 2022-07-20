@@ -253,6 +253,15 @@ public class MainScreen extends JFrame {
 		labelTasksTitle.setForeground(new Color(0, 153, 102));
 		
 		JLabel labelTasksAdd = new JLabel("");
+		labelTasksAdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TaskDialogScreen taskDialogScreen = new TaskDialogScreen();
+				taskDialogScreen.setProject(null);
+				taskDialogScreen.setVisible(rootPaneCheckingEnabled);
+			}
+		});
+		
 		labelTasksAdd.setIcon(new ImageIcon("C:\\Users\\Rcs145\\capgemini-workspace\\Capgemini Project Manager\\src\\projectManager\\resources\\add-icon.png"));
 		GroupLayout gl_panelTasks = new GroupLayout(panelTasks);
 		gl_panelTasks.setHorizontalGroup(
