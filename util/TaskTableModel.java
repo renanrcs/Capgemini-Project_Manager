@@ -10,24 +10,37 @@ import model.Task;
 public class TaskTableModel extends AbstractTableModel{
 	
 	String[] columns = {"Nome", "Descrição", "prazo", "Tarefa Concluida", "Editar", "Excluir"};
-	List<Task> task = new ArrayList();
+	List<Task> tasks = new ArrayList();
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return tasks.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return columns.length;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+
+		switch (columnIndex) {
+		case 1: 
+			return tasks.get(rowIndex).getName();
+		case 2: 
+			return tasks.get(rowIndex).getDescription();
+		case 3: 
+			return tasks.get(rowIndex).getDeadline();
+		case 4: 
+			return tasks.get(rowIndex).isCompleted();
+		case 5: 
+			return "";
+		case 6: 
+			return "";
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + columnIndex);
+		}
 	}
 
 }
