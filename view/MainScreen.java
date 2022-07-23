@@ -1,36 +1,41 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.ImageIcon;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JList;
-import javax.swing.SwingConstants;
-import javax.swing.AbstractListModel;
-import java.awt.Dimension;
-import javax.swing.ListSelectionModel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.DropMode;
-import java.awt.ComponentOrientation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
+
+import controller.ProjectController;
+import controller.TaskController;
+import model.Project;
 
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tableTask;
+	ProjectController projectController;
+	TaskController taskController;
+	
+	DefaultListModel<Project> projectModel;
 
 	/**
 	 * Launch the application.
@@ -52,6 +57,9 @@ public class MainScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public MainScreen() {
+		//metodo para inicializar os controllers
+		initDataController();
+		
 		setMinimumSize(new Dimension(600, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 593, 516);
@@ -341,5 +349,14 @@ public class MainScreen extends JFrame {
 		);
 		panelToolBar.setLayout(gl_panelToolBar);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public void initDataController() {
+		projectController = new ProjectController();
+		taskController = new TaskController();
+	}
+	
+	public void loadProjects() {
+		
 	}
 }
