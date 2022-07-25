@@ -63,6 +63,12 @@ public class TaskTableModel extends AbstractTableModel{
 			throw new IllegalArgumentException("Unexpected value: " + columnIndex);
 		}
 	}
+	
+	@Override
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		tasks.get(rowIndex).setCompleted((boolean) aValue);
+		super.setValueAt(aValue, rowIndex, columnIndex);
+	}
 
 	public String[] getColumns() {
 		return columns;
