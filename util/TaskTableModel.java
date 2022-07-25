@@ -21,6 +21,11 @@ public class TaskTableModel extends AbstractTableModel{
 	public int getColumnCount() {
 		return columns.length;
 	}
+	
+	@Override
+	public String getColumnName(int columnIndex) {
+       return columns[columnIndex];
+    }
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {

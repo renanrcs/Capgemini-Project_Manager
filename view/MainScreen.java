@@ -282,8 +282,14 @@ public class MainScreen extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				TaskDialogScreen taskDialogScreen = new TaskDialogScreen();
-				//taskDialogScreen.setProject(null);
-				taskDialogScreen.setVisible(rootPaneCheckingEnabled);
+				taskDialogScreen.setVisible(true);
+				
+				taskDialogScreen.addWindowListener(new WindowAdapter() {
+					
+					public void windowClosed(WindowEvent e) {
+						loadTasks(3);
+					}
+				});
 			}
 		});
 		
@@ -391,11 +397,11 @@ public class MainScreen extends JFrame {
 		taskModel = new TaskTableModel();
 		tableTask.setModel(taskModel);
 		
-		loadTasks();
+		loadTasks(3);
 	}
 	
-	public void loadTasks() {
-		List<Task> tasks = taskController.getAll(3);
+	public void loadTasks(int idProject) {
+		List<Task> tasks = taskController.getAll(idProject);
 		
 		taskModel.setTasks(tasks);
 	}
