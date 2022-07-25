@@ -150,6 +150,8 @@ public class MainScreen extends JFrame {
 		);
 		
 		tableTask = new JTable();
+		tableTask.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		tableTask.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		//Customizando o header da table de tarefas
 		tableTask.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
