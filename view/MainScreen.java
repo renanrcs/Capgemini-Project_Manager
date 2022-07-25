@@ -32,20 +32,21 @@ import javax.swing.table.TableModel;
 import controller.ProjectController;
 import controller.TaskController;
 import model.Project;
+import model.Task;
 import util.TaskTableModel;
 
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tableTask;
-	JList<Project> JlistProjects = new JList<Project>();
+	private JList<Project> JlistProjects;
 
 	ProjectController projectController;
 	TaskController taskController;
 	
 	DefaultListModel projectsModel;
-	DefaultListModel taskModel;
-	//TaskTableModel taskModel;
+	//DefaultListModel taskModel;
+	TaskTableModel taskModel;
 
 
 	/**
@@ -68,10 +69,6 @@ public class MainScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public MainScreen() {
-
-		//metodo para inicializar os controllers
-		initDataController();
-		initComponentsModel();
 		
 		setMinimumSize(new Dimension(600, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,8 +111,8 @@ public class MainScreen extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(panelProjectsList, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(panelProjects, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+						.addComponent(panelProjectsList, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panelProjects, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
@@ -131,7 +128,7 @@ public class MainScreen extends JFrame {
 						.addComponent(panelProjects, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(panelProjectsList, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 		);
 		
@@ -247,8 +244,8 @@ public class MainScreen extends JFrame {
 			gl_panelProjectsList.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelProjectsList.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPaneProjects, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(scrollPaneProjects, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panelProjectsList.setVerticalGroup(
 			gl_panelProjectsList.createParallelGroup(Alignment.LEADING)
@@ -258,7 +255,8 @@ public class MainScreen extends JFrame {
 					.addContainerGap())
 		);
 		
-		JList JlistProjects = new JList();
+		JlistProjects = new JList<Project>();
+		
 		JlistProjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneProjects.setViewportView(JlistProjects);
 		JlistProjects.setFixedCellHeight(50);
@@ -375,6 +373,10 @@ public class MainScreen extends JFrame {
 		);
 		panelToolBar.setLayout(gl_panelToolBar);
 		contentPane.setLayout(gl_contentPane);
+		
+		//metodo para inicializar os controllers
+				initDataController();
+				initComponentsModel();
 	}
 	
 	public void initDataController() {
@@ -386,8 +388,16 @@ public class MainScreen extends JFrame {
 		projectsModel =  new DefaultListModel();
 		loadProjects();
 		
-		//taskModel = new TaskTableModel();
-		//tableTask.setModel(taskModel);
+		taskModel = new TaskTableModel();
+		tableTask.setModel(taskModel);
+		
+		loadTasks();
+	}
+	
+	public void loadTasks() {
+		List<Task> tasks = taskController.getAll(3);
+		
+		taskModel.setTasks(tasks);
 	}
 	
 	public void loadProjects() {
