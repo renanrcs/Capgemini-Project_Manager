@@ -150,6 +150,23 @@ public class MainScreen extends JFrame {
 		);
 		
 		tableTask = new JTable();
+		tableTask.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				int rowIndex = tableTask.rowAtPoint(e.getPoint());
+				int columnIndex = tableTask.columnAtPoint(e.getPoint());
+				
+				switch (columnIndex) {
+				case 3:
+					Task task = taskModel.getTasks().get(rowIndex);
+					taskController.update(task);
+				break;
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + columnIndex);
+				}
+			}
+		});
 		tableTask.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		tableTask.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
