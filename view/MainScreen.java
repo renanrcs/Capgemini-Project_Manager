@@ -39,7 +39,7 @@ public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tableTask;
-	private JList<Project> JlistProjects;
+	private JList<Project> jlistProjects;
 
 	ProjectController projectController;
 	TaskController taskController;
@@ -274,14 +274,23 @@ public class MainScreen extends JFrame {
 					.addContainerGap())
 		);
 		
-		JlistProjects = new JList<Project>();
+		jlistProjects = new JList<Project>();
+		jlistProjects.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				int projectIndex = jlistProjects.getSelectedIndex();
+				Project project = (Project) projectsModel.get(projectIndex);
+				loadTasks(project.getId());
+			}
+		});
 		
-		JlistProjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPaneProjects.setViewportView(JlistProjects);
-		JlistProjects.setFixedCellHeight(50);
-		JlistProjects.setSelectionBackground(new Color(0, 153, 102));
-		JlistProjects.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		JlistProjects.setModel(new AbstractListModel() {
+		jlistProjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPaneProjects.setViewportView(jlistProjects);
+		jlistProjects.setFixedCellHeight(50);
+		jlistProjects.setSelectionBackground(new Color(0, 153, 102));
+		jlistProjects.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		jlistProjects.setModel(new AbstractListModel() {
 			String[] values = new String[] {};
 			public int getSize() {
 				return values.length;
@@ -437,6 +446,6 @@ public class MainScreen extends JFrame {
 		}
 
 		
-		JlistProjects.setModel(projectsModel);
+		jlistProjects.setModel(projectsModel);
 	}
 }
